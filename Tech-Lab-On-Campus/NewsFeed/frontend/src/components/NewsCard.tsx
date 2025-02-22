@@ -24,8 +24,20 @@ function NewsCard({ article }: NewsCardProps) {
     return (
         <div className="news-card">
             <div className="news-info">
-                {/* TODO: Remove the span below and implement a reusable NewsCard */}
-                <span className='instruction'>Part 2: Build Reusable News Card</span>
+                <div className = "news-card-img-div">
+                    <img src={article.image_url} 
+                    alt={article.title} 
+                    className = "news-card-img" 
+                    />
+                </div>
+                <div className = "news-card-words">
+                    <h1 className = "news-card-title"> {article.title}</h1>
+                    <p className = "story-summary"> {article.body}</p>
+                    {article.author && <span className="news-story-author">By {article.author}</span>}
+                    {article.url && <span className="news-story-author" >
+                        <Link className="origin-link" href={article.url} target="_blank">View Story</Link>
+                    </span>}
+                </div>
             </div>
         </div>
     );
