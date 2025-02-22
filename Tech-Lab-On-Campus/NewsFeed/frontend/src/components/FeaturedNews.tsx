@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Article } from "@/utils/types";
+import image from "next/image";
 
 interface NewsCardProps {
     article: Article;
@@ -9,6 +10,7 @@ interface NewsCardProps {
 function FeaturedNewsCard({ article }: NewsCardProps) {
     // PART 1: Display a Featured News article
 
+    
     // Using the info about the article passed in as a prop, show:
     // 1. The featured article's title
     // 2. The featured article's image
@@ -20,9 +22,20 @@ function FeaturedNewsCard({ article }: NewsCardProps) {
 
     return (
         <>
-            <span className='instruction'>Part 1: Show Featured News</span>
             <div className="featured-news-card">
-                {/* TODO: Remove the span above and implement "FeaturedNewsCard" */}
+                <div className = "featured-news-card-img-div">
+                    <img src= {article.image_url} 
+                    alt={article.title} 
+                    className = "featured-news-car-img"/>
+                </div>
+                <div className = "featured-news-info">
+                    <h2 className = "featured-news-title"> {article.title}</h2>
+                    <p className = "featured-news-body"> {article.body}</p>
+                    {article.author && <span className="featured-story-author">By {article.author}</span>}
+                    {article.url && <span className="featured-story-author" >
+                        Via <Link className="origin-link" href={article.url} target="_blank">{article.url}</Link>
+                    </span>}
+                </div>  
             </div>
         </>
     );
