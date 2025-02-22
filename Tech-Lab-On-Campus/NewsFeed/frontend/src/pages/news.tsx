@@ -57,7 +57,26 @@ export default function News() {
     //         populate real data to the page.
     useEffect(() => {
         const fetchData = async () => {
+
+            const articlesResponse = await fetch('/api/news/get-newsfeed', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const featuredArticleResponse = await fetch('/api/news/get-featured-article', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+
+            setArticles(await articlesResponse.json());
+            setFeaturedArticle(await featuredArticleResponse.json());
             // 1. Fetch the featured article from '/api/news/get-featured-article'
+           
             // 2. Fetch the news feed data from '/api/news/get-newsfeed'
             // 3. Use the `set` functions defined above to update the `articles` and `featuredArticle` variables
 
@@ -74,10 +93,6 @@ export default function News() {
                 <div className="col-span-4 lg:col-span-3">
                     <FeaturedNewsCard article={featuredArticle} />
                     <NewsFeed articles={articles} />
-
-                    {/* Once you're done with Part 4, feel free to remove the span below! */}
-                    <span className="instruction">Part 4: Connect the backend and fetch real data</span>
-
                 </div>
                 <div className="hidden lg:block col-span-1 overflow-hidden border-l border-slate-300">
                     <div className="flex flex-col gap-4 divide-y divide-slate-300 space-x-2">
